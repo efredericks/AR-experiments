@@ -14,6 +14,25 @@ let t = 0;
 const cols = ['#01295f', '#437f97', '#849324', '#ffb30f', '#fd151b', 120];
 let particles;
 
+let model;
+function preload() {
+  // let options = {
+  //   // Enables standardized size scaling during loading if set to true.
+  //   normalize: true,
+  //   // Function to call once the model loads.
+  //   successCallback: handleModel,
+  //   // Function to call if an error occurs while loading.
+  //   failureCallback: handleError,
+  //   // Model's file extension.
+  //   fileType: '.stl',
+  //   // Flips the U texture coordinates of the model.
+  //   flipU: false,
+  //   // Flips the V texture coordinates of the model.
+  //   flipV: false
+  // };
+  model = loadModel('./assets/gvsu-spinning-keychain/GVSUSpinLogo.stl', true)
+}
+
 function setup() {
   //createCanvas(W*N/2,W*N/2);
 
@@ -100,6 +119,7 @@ function setup() {
     gfxs.push({ g: gfx, sx: sx, sy: sy });
   }
 
+  gfx_3d = createARGraphics(W, W, WEBGL, { scale: 2, markerId: 5 });
 
 
   background(20);
@@ -114,8 +134,11 @@ function setup() {
   }
   textSize(24);
   textAlign(CENTER, CENTER);
+
+  saveGif("door.gif", 12)
 }
 
+let gfx_3d;
 function draw() {
   // background(20);
   // fill(20);
@@ -140,6 +163,35 @@ function draw() {
       p.y = random(0, W * 2 - 1);
     }
   }
+
+  gfx_3d.background(255);
+  gfx_3d.ambientLight(20);
+  gfx_3d.pointLight(
+    255, 0, 0, // color
+    40, -40, 0 // position
+  );
+  gfx_3d.directionalLight(
+    0,255,0, // color
+    1, 1, 0  // direction
+  );
+
+  // normal material shows the geometry normals
+  gfx_3d.normalMaterial();
+  // ambient materials reflect under any light
+  gfx_3d.ambientMaterial(0, 0, 255);
+  // emissive materials show the same color regardless of light
+  gfx_3d.emissiveMaterial(0,0, 255);
+  // specular materials reflect the color of the light source
+  // and can vary in 'shininess'
+  gfx_3d.shininess(10);
+  gfx_3d.specularMaterial(0, 0, 255);
+
+  gfx_3d.push();
+  gfx_3d.rotateX(millis() * 0.001);
+  gfx_3d.rotateY(millis() * 0.001);
+  gfx_3d.rotateZ(millis() * 0.001);
+  gfx_3d.model(model);
+  gfx_3d.pop();
 
   // gfxs.forEach((gfx, index) => {
   //   gfx.g.clear();
