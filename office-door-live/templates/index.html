@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="{{ url_for('static', filename='p5.js') }}""></script>
+    <!--<script src=" https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.sound.min.js"></script>-->
+  <script src="{{ url_for('static', filename='p5SimpleAR.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="utf-8" />
+
+  <!-- socket stuff -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+  <main>
+  </main>
+  <script src="{{ url_for('static', filename='sketch.js') }}"></script>
+</body>
+
+</html>
