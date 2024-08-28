@@ -10,7 +10,7 @@ const NUM_PARTICLES = 5000;
 let grid;
 
 let socket;
-
+let btn;
 let t = 0;
 const cols = ['#01295f', '#437f97', '#849324', '#ffb30f', '#fd151b', 120];
 let particles;
@@ -71,16 +71,20 @@ function setup() {
     socket.emit('my event', { data: 'I\'m connected!' });
   });
   socket.on('connection success', data => {
-    num_users = data['num_users'];
+    num_users = 500;
+    // num_users = data['num_users'];
     console.log("Received num users: " + data['num_users']);
   });
+
+  btn = createButton('click')
+  btn.position(20,20);
 }
 
 function setupParticles() {
   for (let _ = 0; _ < num_users; _++) {
     particles.push({
-      x: random(0, W * 2 - 1),
-      y: random(0, W * 2 - 1),
+      x: random(0, W-1),// * 2 - 1),
+      y: random(0, W-1),// * 2 - 1),
       col: random(cols),//255),
     });
   }

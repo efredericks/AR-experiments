@@ -135,10 +135,13 @@ function setup() {
   textSize(24);
   textAlign(CENTER, CENTER);
 
-  saveGif("door.gif", 12)
+  // saveGif("door.gif", 12)
+  btn = createButton('click')
+  btn.position(20,20);
 }
 
 let gfx_3d;
+let btn;
 function draw() {
   // background(20);
   // fill(20);
